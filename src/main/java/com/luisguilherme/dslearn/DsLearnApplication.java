@@ -1,4 +1,4 @@
-package com.luisguilherme.dspost;
+package com.luisguilherme.dslearn;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
