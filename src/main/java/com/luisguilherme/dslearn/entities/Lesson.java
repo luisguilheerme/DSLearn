@@ -1,52 +1,55 @@
 package com.luisguilherme.dslearn.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_section")
-public class Section {
+@Table(name = "tb_lesson")
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Lesson {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
-	private String description;
 	private Integer position;
-	private String imgUri;
 
 	@ManyToOne
-	@JoinColumn(name = "resource_id")
-	private Resource resource;
-	
-	@ManyToOne
-	@JoinColumn(name = "prerequisite_id")
-	private Section prerequisite;
-	
-	@OneToMany(mappedBy = "section")
-	private List<Lesson> lessons = new ArrayList<>();
+	@JoinColumn(name = "section_id")
+	private Section section;
 
-	public Section() {
+	@ManyToMany
+	@JoinTable(name = "tb_lessons_done",
+		joinColumns = @JoinColumn(name = "lesson_id"),
+		inverseJoinColumns = {
+				@JoinColumn(name = "user_id"),
+				@JoinColumn(name = "offer_id")
+		}
+	)
+	private Set<Enrollment> enrollmentsDone = new HashSet<>();
 
-	}	
-	
-	public Section(Long id, String title, String description, Integer position, String imgUri, Resource resource) {
+	public Lesson() {
+
+	}
+
+	public Lesson(Long id, String title, Integer position, Section section) {
 		this.id = id;
 		this.title = title;
-		this.description = description;
 		this.position = position;
-		this.imgUri = imgUri;
-		this.resource = resource;
+		this.section = section;
 	}
 
 	public Long getId() {
@@ -65,14 +68,6 @@ public class Section {
 		this.title = title;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public Integer getPosition() {
 		return position;
 	}
@@ -81,20 +76,16 @@ public class Section {
 		this.position = position;
 	}
 
-	public String getImgUri() {
-		return imgUri;
+	public Section getSection() {
+		return section;
 	}
 
-	public void setImgUri(String imgUri) {
-		this.imgUri = imgUri;
+	public void setSection(Section section) {
+		this.section = section;
 	}
 
-	public Resource getResource() {
-		return resource;
-	}
-
-	public void setResource(Resource resource) {
-		this.resource = resource;
+	public Set<Enrollment> getEnrollmentsDone() {
+		return enrollmentsDone;
 	}
 
 	@Override
@@ -110,7 +101,7 @@ public class Section {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Section other = (Section) obj;
+		Lesson other = (Lesson) obj;
 		return Objects.equals(id, other.id);
 	}
 
