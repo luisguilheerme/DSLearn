@@ -14,7 +14,7 @@ Diferentes ofertas do mesmo curso podem ter pequenas variações no conteúdo, c
 
 
 ### Modelo Conceitual
-![Modelo conceitual]([https://github.com/luisguilheerme/assets/blob/main/dscommerce/modelo_conceitual.png](https://github.com/luisguilheerme/assets/blob/main/dslearn/modelo-conceitual.png))
+![Modelo conceitual](https://github.com/luisguilheerme/assets/blob/main/dslearn/modelo-conceitual.png)
 
 ### Tecnologias utilizadas
 -Java
