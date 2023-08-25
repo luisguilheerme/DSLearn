@@ -2,7 +2,6 @@
 Projeto DSLearn com modelo de domínio complexo, desenvolvido durante o curso Java Spring Ultimate.
 
 ## ESPECIFICAÇÃO - Sistema DSLearn:
-Visão geral do sistema DSLearn
 O sistema consiste em uma plataforma de ensino que mantém informações de cursos, suas turmas e alunos. Os atores do sistema podem ser alunos e professores. 
 Há também usuários administradores, que são os únicos autorizados a cadastrar cursos e turmas.
 Um curso é composto de vários “recursos”, que são grupos de conteúdos. Estes recursos podem ser trilhas de aprendizado, bônus, links externos, e o próprio fórum de perguntas e respostas do curso. 
